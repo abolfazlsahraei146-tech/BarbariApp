@@ -1,0 +1,192 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(BarbariApp());
+}
+
+class BarbariApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'باربری آنلاین',
+      theme: ThemeData(
+        fontFamily: 'Vazir', // فونت فارسی که بعداً اضافه می‌کنیم
+        primarySwatch: Colors.blue,
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('باربری آنلاین'),
+        ),
+        body: Center(
+          child: Text(
+            'به اپ باربری خوش آمدید 🚚',
+            style: TextStyle(fontSize: 22),
+          ),
+        ),
+      ),
+    );
+  }
+}
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(BarbariApp());
+}
+
+class BarbariApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'باربری آنلاین',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        fontFamily: 'sans',
+      ),
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('باربری آنلاین'),
+      ),
+      body: ListView(
+        children: [
+          menuItem(context, 'ثبت بار', RegisterLoadPage()),
+          menuItem(context, 'لیست بارها', LoadListPage()),
+          menuItem(context, 'ثبت راننده', RegisterDriverPage()),
+          menuItem(context, 'لیست راننده‌ها', DriverListPage()),
+        ],
+      ),
+    );
+  }
+
+  Widget menuItem(BuildContext context, String title, Widget page) {
+    return Card(
+      margin: EdgeInsets.all(12),
+      child: ListTile(
+        title: Text(title, style: TextStyle(fontSize: 20)),
+        trailing: Icon(Icons.arrow_forward_ios),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => page),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class RegisterLoadPage extends StatelessWidget {
+  final TextEditingController name = TextEditingController();
+  final TextEditingController weight = TextEditingController();
+  final TextEditingController origin = TextEditingController();
+  final TextEditingController destination = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('ثبت بار')),
+      body: Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: [
+            textBox(name, 'نام بار'),
+            textBox(weight, 'وزن بار'),
+            textBox(origin, 'مبدا'),
+            textBox(destination, 'مقصد'),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {},
+              child: Text('ثبت'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget textBox(TextEditingController c, String label) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 12),
+      child: TextField(
+        controller: c,
+        decoration: InputDecoration(
+          labelText: label,
+          border: OutlineInputBorder(),
+        ),
+      ),
+    );
+  }
+}
+
+class LoadListPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('لیست بارها')),
+      body: Center(
+        child: Text('فعلاً لیست خالی است'),
+      ),
+    );
+  }
+}
+
+class RegisterDriverPage extends StatelessWidget {
+  final TextEditingController name = TextEditingController();
+  final TextEditingController phone = TextEditingController();
+  final TextEditingController car = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('ثبت راننده')),
+      body: Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: [
+            textBox(name, 'نام راننده'),
+            textBox(phone, 'شماره تماس'),
+            textBox(car, 'نوع خودرو'),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {},
+              child: Text('ثبت'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget textBox(TextEditingController c, String label) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 12),
+      child: TextField(
+        controller: c,
+        decoration: InputDecoration(
+          labelText: label,
+          border: OutlineInputBorder(),
+        ),
+      ),
+    );
+  }
+}
+
+class DriverListPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('لیست راننده‌ها')),
+      body: Center(
+        child: Text('فعلاً لیست خالی است'),
+      ),
+    );
+  }
+}
